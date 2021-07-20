@@ -1,5 +1,5 @@
 # e94091071_arduinofinal
-> 設定完成與重新選擇時buzzer的聲音
+> *設定完成與重新選擇時buzzer的聲音*
 
     void finish(int pin){
     tone(pin, 100, 100);
@@ -17,7 +17,7 @@
     noTone(pin);
     }
     
-> 使車子前進、右轉、左轉、停止、後退
+> *使車子前進、右轉、左轉、停止、後退*
 
     void advance(int a)    // 前進
     {
@@ -64,7 +64,7 @@
     delay(g * 100);     
     }
     
-> 使servo隨機停下以選擇目標
+> *使servo隨機停下以選擇目標*
 >
 > > 隨機取a值，若為0，則使servo由10開始轉至11~180任一處
 > > 
@@ -98,26 +98,44 @@
 > >       }
 > >     }
 
-> 讀取藍芽訊號並判斷
+> *讀取藍芽訊號並判斷*
 > 
 >     int cmd = Serial.read();
-> > 執行對應指令
-> > > 車子前進並隨機選擇前進距離
-> > > 
-> > >     case 'W':// 前進並隨機選擇距離
-> > >     if(!decide)
-> > >     {  
-> > >      int t=random(1,4);
-> > >      if(t==1)
-> > >      choice(10); 
-> > >      else if(t==2)
-> > >      choice(20);
-> > >      else
-> > >      choice(35);
-> > > 使decide為true以結束指令迴圈
-> > > 
-> > >      decide=true;
-> > >      }
-> > >      else
-> > >      delay(100);  
-> > >      break;
+> *執行對應指令*
+> > **車子前進並隨機選擇前進距離**
+> > 
+> >     case 'W':
+> >     if(!decide)
+> >     {  
+> >     int t=random(1,4);
+> >     if(t==1)
+> >     choice(10); 
+> >     else if(t==2)
+> >     choice(20);
+> >     else
+> >     choice(35);
+>       
+> > 使decide為true以結束指令迴圈
+> >  
+> >     decide=true;
+> >     }
+> >     else
+> >     delay(100);  
+> >     break;
+> 
+> > **開啟servo與laser以選定目標，並在servo停下時令buzzer發出完成的提示聲**
+> >     
+> >     case 'A':
+> >     digitalWrite(LaserPIN, HIGH);
+> >     if(!servoOn)
+> >     {
+> >     servo();
+> >     finish(buzzerPin);
+> >     servoOn=true;
+> >     }
+> 
+> > 使servoOn為true以結束指令迴圈
+> >     
+> >     else
+> >     delay(100);
+> >     break;
