@@ -1,4 +1,12 @@
 # e94091071_arduinofinal
+> *運用` randomSeed(analogRead(A0)) `隨機取數*
+
+> *定義三個布林值，判斷是否執行過前進、選擇與servo旋轉*
+
+    bool go=false;
+    bool decide=false;
+    bool servoOn=false;
+       
 > *設定完成與重新選擇時buzzer的聲音*
 
     void finish(int pin){
@@ -17,7 +25,7 @@
     noTone(pin);
     }
     
-> *使車子前進、右轉、左轉、停止、後退*
+> *車子前進、右轉、左轉、停止、後退*
 
     void advance(int a)    // 前進
     {
@@ -64,45 +72,64 @@
     delay(g * 100);     
     }
     
+> *使車子前進某距離後轉向標靶*
+
+    void choice(int j)
+    {
+        if(!go)
+            {
+            linetracking();
+            delay(j*100);
+            stopRL(10);
+            turnR(6);
+            advance(5);
+            stopRL(10);
+            go=true;}
+        else
+           {
+            stopRL(0);
+            go=true;}
+    }  
+    
 > *使servo隨機停下以選擇目標*
 >
 > > 隨機取a值，若為0，則使servo由10開始轉至11~180任一處
 > > 
-> >     void servo()  
-> >     {
-> >       int a=random(0,2);
-> >       if(a==0)
-> >       {
-> >         int b=random(11,181);
-> >         for(pos = 10; pos <= b; pos += 1) 
-> >       { myservo.write(pos);             
-> >         delay(15);
-> >         } 
-> >       }
+>     void servo()  
+>     {
+>       int a=random(0,2);
+>       if(a==0)
+>       {
+>         int b=random(11,181);
+>         for(pos = 10; pos <= b; pos += 1) 
+>       { myservo.write(pos);             
+>         delay(15);
+>         } 
+>       }
 > 
 > > 若為1，則使servo由10開始轉至180，再由180轉至10~179任一處
 > > 
-> >       else
-> >       {
-> >         int b=random(10,180);
-> >         for(pos = 10; pos <= 180; pos += 1) 
-> >       {                                  
-> >         myservo.write(pos);             
-> >         delay(15);                     
-> >       } 
-> >       for(pos = 180; pos>=b; pos-=1)      
-> >       {                                
-> >         myservo.write(pos);               
-> >         delay(15);                       
-> >       } 
-> >       }
-> >     }
+>       else
+>       {
+>         int b=random(10,180);
+>         for(pos = 10; pos <= 180; pos += 1) 
+>       {                                  
+>         myservo.write(pos);             
+>         delay(15);                     
+>       } 
+>       for(pos = 180; pos>=b; pos-=1)      
+>       {                                
+>         myservo.write(pos);               
+>         delay(15);                       
+>       } 
+>       }
+>     }
 
 > *讀取藍芽訊號並判斷*
 > 
 >     int cmd = Serial.read();
 > *執行對應指令*
-> > **車子前進並隨機選擇前進距離**
+> > **車子前進並隨機選擇三種前進距離**
 > > 
 > >     case 'W':
 > >     if(!decide)
@@ -114,7 +141,7 @@
 > >     choice(20);
 > >     else
 > >     choice(35);
->       
+> >       
 > > 使decide為true以結束指令迴圈
 > >  
 > >     decide=true;
@@ -133,7 +160,7 @@
 > >     finish(buzzerPin);
 > >     servoOn=true;
 > >     }
-> 
+> > 
 > > 使servoOn為true以結束指令迴圈
 > >     
 > >     else
@@ -149,7 +176,7 @@
 > >     servoOn=false;
 > >     break;
 > 
-> > **令go與decide為false，可重新選擇前進距離**
+> > **令go與decide為false，可重新選擇前進距離，令buzzer發出重新選擇提示聲**
 > > 
 > >     case 'S':
 > >     decide=false;
