@@ -1,4 +1,4 @@
-# e94091071_arduinofinal
+# arduinofinal
 [實際成果影片](https://drive.google.com/file/d/1pDSMrXN3-BmTFGkf7dIT4doPZKsomNkE/view?usp=sharing)
 
 #### 程式碼說明
