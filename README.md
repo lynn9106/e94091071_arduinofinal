@@ -158,11 +158,10 @@
 > >     {
 > >     servo();
 > >     finish(buzzerPin);
-> >     servoOn=true;
-> >     }
-> > 
 > > 使servoOn為true以結束指令迴圈
 > >     
+> >     servoOn=true;
+> >     }     
 > >     else
 > >     delay(100);
 > >     break;
@@ -176,7 +175,7 @@
 > >     servoOn=false;
 > >     break;
 > 
-> > **令go與decide為false，可重新選擇前進距離，令buzzer發出重新選擇提示聲**
+> > **令go與decide為false，可再次執行隨機選擇距離，令buzzer發出重新選擇提示聲**
 > > 
 > >     case 'S':
 > >     decide=false;
