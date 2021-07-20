@@ -1,5 +1,5 @@
 # e94091071_arduinofinal
->設定完成與重新選擇時buzzer的聲音
+> 設定完成與重新選擇時buzzer的聲音
 
     void finish(int pin){
     tone(pin, 100, 100);
@@ -17,7 +17,7 @@
     noTone(pin);
     }
     
->使車子前進、右轉、左轉、停止、後退
+> 使車子前進、右轉、左轉、停止、後退
 
     void advance(int a)    // 前進
     {
@@ -63,3 +63,7 @@
     digitalWrite(MotorB_I4,HIGH);
     delay(g * 100);     
     }
+    
+> 使servo隨機停下以選擇目標
+>
+> > 隨機取a值，若為0，則使servo由10開始轉至11~180任一處
