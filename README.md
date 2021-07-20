@@ -67,3 +67,57 @@
 > 使servo隨機停下以選擇目標
 >
 > > 隨機取a值，若為0，則使servo由10開始轉至11~180任一處
+> > 
+> >     void servo()  
+> >     {
+> >       int a=random(0,2);
+> >       if(a==0)
+> >       {
+> >         int b=random(11,181);
+> >         for(pos = 10; pos <= b; pos += 1) 
+> >       { myservo.write(pos);             
+> >         delay(15);
+> >         } 
+> >       }
+> 
+> > 若為1，則使servo由10開始轉至180，再由180轉至10~179任一處
+> > 
+> >       else
+> >       {
+> >         int b=random(10,180);
+> >         for(pos = 10; pos <= 180; pos += 1) 
+> >       {                                  
+> >         myservo.write(pos);             
+> >         delay(15);                     
+> >       } 
+> >       for(pos = 180; pos>=b; pos-=1)      
+> >       {                                
+> >         myservo.write(pos);               
+> >         delay(15);                       
+> >       } 
+> >       }
+> >     }
+
+> 讀取藍芽訊號並判斷
+> 
+>     int cmd = Serial.read();
+> > 執行對應指令
+> > > 車子前進並隨機選擇前進距離
+> > > 
+> > >     case 'W':// 前進並隨機選擇距離
+> > >     if(!decide)
+> > >     {  
+> > >      int t=random(1,4);
+> > >      if(t==1)
+> > >      choice(10); 
+> > >      else if(t==2)
+> > >      choice(20);
+> > >      else
+> > >      choice(35);
+> > > 使decide為true以結束指令迴圈
+> > > 
+> > >      decide=true;
+> > >      }
+> > >      else
+> > >      delay(100);  
+> > >      break;
