@@ -139,3 +139,27 @@
 > >     else
 > >     delay(100);
 > >     break;
+> 
+> > **關閉laser，歸位servo，並令servoOn為false使servo可重新啟用**
+> > 
+> >     case 'D':
+> >     digitalWrite(LaserPIN, LOW);
+> >     myservo.write(10);
+> >     cancel(buzzerPin);
+> >     servoOn=false;
+> >     break;
+> 
+> > **令go與decide為false，可重新選擇前進距離**
+> > 
+> >     case 'S':
+> >     decide=false;
+> >     go=false;
+> >     cancel(buzzerPin);
+> >     break;
+
+
+
+
+
+
+
