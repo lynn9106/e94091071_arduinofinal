@@ -1,4 +1,7 @@
 # e94091071_arduinofinal
+[實際成果影片](https://drive.google.com/file/d/1pDSMrXN3-BmTFGkf7dIT4doPZKsomNkE/view?usp=sharing)
+
+#### 程式碼說明
 > *運用` randomSeed(analogRead(A0)) `隨機取數*
 
 > *定義三個布林值，判斷是否執行過前進、選擇與servo旋轉*
